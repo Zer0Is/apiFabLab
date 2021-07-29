@@ -25,4 +25,3 @@ router.get('/:fechaInicio/:fechaFin', async (req, res) => {
 });
 
 module.exports = router;
-//javier.delacerda@fablab.usm.cl

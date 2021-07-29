@@ -14,7 +14,11 @@ module.exports = {
   },
   development: {
     client: 'pg',
-    connection: 'postgres://postgres:12345@localhost/fablab',
+    connection: {
+      database: "fablab",
+      user: "postgres",
+      password: "12345"
+    },
     migrations: {
       directory: path.join(__dirname, '/database/migrations'),
     },

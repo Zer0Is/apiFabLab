@@ -4,8 +4,8 @@ const requestify = require('requestify');
 
 router.get('/:online', async (req, res) => {
     var url = 'https://c840cfx2we.execute-api.us-east-1.amazonaws.com/dev/isw/printer-report';
-    var online = req.params.online
-    var arr = []
+    var online = req.params.online;
+    var arr = [];
 
     var resultado = await requestify.get(url).then((response) =>{
         return response.getBody().Items;

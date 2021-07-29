@@ -4,8 +4,8 @@ const requestify = require('requestify');
 
 router.get('/:workgroup_name', async (req, res) => {
     var url = 'https://c840cfx2we.execute-api.us-east-1.amazonaws.com/dev/isw/org-user-list-report';
-    var work_group = req.params.workgroup_name
-    var arr = []
+    var work_group = req.params.workgroup_name;
+    var arr = [];
 
     var resultado = await requestify.get(url).then((response) =>{
         return response.getBody().Items;
