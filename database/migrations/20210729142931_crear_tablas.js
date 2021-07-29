@@ -7,7 +7,7 @@ exports.up = function(knex) {
         table.string('nombre').notNullable();
         table.string('carrera').notNullable();
         table.string('campus').notNullable();
-        table.string('rango').notNullable();
+        table.string('rango');
         // created_at and updated_at
         table.timestamps();
         table.primary(['rut', 'categoria']);
