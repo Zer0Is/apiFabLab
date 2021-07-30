@@ -4,12 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//RUTAS ENTREGA 3
 var costoFechaRouter = require('./routes/costoHastaFecha');
 var onlineRouter = require('./routes/Online_Offline');
 var grupoIndividuosRouter = require ('./routes/grupoIndividual');
 var IntegrantesRouter = require('./routes/Integrantes');
 var infoGrupoRouter = require('./routes/infoGrupo');
 
+//RUTAS ENTREGA 4
+var maker = require('./apiServices/maker/routes');
+var gestor = require('./apiServices/gestor/routes');
+var getMakerOAyudante = require('./apiServices/get/routes');
 var app = express();
 
 // view engine setup
@@ -22,12 +27,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+//RUTAS ENTREGA 3
 app.use('/costoHastaFecha', costoFechaRouter);
 app.use('/Online_Offline', onlineRouter);
 app.use('/grupoIndividual', grupoIndividuosRouter);
 app.use('/Integrantes', IntegrantesRouter);
 app.use('/infoGrupo', infoGrupoRouter);
+
+//RUTAS ENTREGA 4
+app.use('/', maker);
+app.use('/', gestor);
+app.use('/', getMakerOAyudante);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
