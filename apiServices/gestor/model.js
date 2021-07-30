@@ -3,7 +3,6 @@ const db = require('../../db');
 
 module.exports = {
     async create(maker){
-        const gestor = 0;
         try{
             if (maker.rut != null && maker.nombre != null){
                 const gestor = await db('gestor').insert({
@@ -21,7 +20,6 @@ module.exports = {
     },
 
     async read(maker){
-        const gestor = 0;
         try{
             //No lleva parametros
             if (Object.keys(maker).length === 0){
@@ -45,7 +43,6 @@ module.exports = {
     },
 
     async update(maker){
-        const gestor = 0;
         try{
             //solo permite cambiar el nombre
             if(maker.rut != null && maker.nombre != null){
@@ -64,7 +61,6 @@ module.exports = {
     },
 
     async delete(maker){
-        const gestor = 0;
         try{
             const gestor = await db('gestor').where('rut', maker.rut)
             .del()

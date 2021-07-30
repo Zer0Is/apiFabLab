@@ -3,23 +3,8 @@ const db = require('../../db');
 
 module.exports = {
     async create(maker){
-        const individuo = 0;
         try{
-            if(maker.rango != null){
-                const individuo = await db('makers').insert({
-                rut: maker.rut,
-                categoria: maker.categoria,
-                nombre: maker.nombre,
-                carrera: maker.carrera,
-                campus: maker.campus,
-                rango: maker.rango
-                })
-                .returning('*');
-
-                return individuo;
-            }
-            //hacer peticion usando db minuto 29:29 limk: https://www.youtube.com/watch?v=wfrn21E2NaU&ab_channel=productioncoder
-            else{
+            if(maker.categoria === 'estudiante'){
                 const individuo = await db('makers').insert({
                 rut: maker.rut,
                 categoria: maker.categoria,
@@ -31,6 +16,30 @@ module.exports = {
 
                 return individuo;
             }
+
+            else if(maker.categoria === 'ayudante'){
+                const individuo = await db('makers').insert({
+                rut: maker.rut,
+                categoria: maker.categoria,
+                nombre: maker.nombre,
+                rango: maker.rango
+                })
+                .returning('*');
+
+                return individuo;
+            }
+
+            else if(maker.categoria === 'externo'){
+                const individuo = await db('makers').insert({
+                rut: maker.rut,
+                categoria: maker.categoria,
+                nombre: maker.nombre
+                })
+                .returning('*');
+
+                return individuo;
+            }
+
         }
         catch(error) {
             console.log(error);
@@ -38,7 +47,6 @@ module.exports = {
     },
 
     async read(maker){
-        const individuo = 0;
         try{
             //No lleva parametros
             if (Object.keys(maker).length === 0){
@@ -70,63 +78,80 @@ module.exports = {
     },
 
     async update(maker){
-        const individuo = 0;
         try{
-            //lleva todos los atributos
-            if(maker.rut != null && maker.categoria != null && maker.nombre != null && maker.campus != null && maker.carrera != null && maker.rango != null){
-                const individuo = await db('makers').where({
-                    rut: maker.rut,
-                    categoria: maker.categoria
-                })
-                .update({
-                    nombre: maker.nombre,
-                    campus: maker.campus,
-                    carrera: maker.carrera,
-                    rango: maker.rango
-                })
-                .returning('*');
-            }
-
-            else{
-                if(maker.rut != null && maker.categoria != null && maker.nombre != null){
+            //externo
+            if(maker.rut != null && maker.categoria === 'externo'){
+                if(maker.nombre != null){
                     const individuo = await db('makers').where({
                         rut: maker.rut,
                         categoria: maker.categoria
                     })
                     .update('nombre', maker.nombre)
                     .returning('*');
-                }
-                if(maker.rut != null && maker.categoria != null && maker.campus != null){
-                    const individuo = await db('makers').where({
-                        rut: maker.rut,
-                        categoria: maker.categoria
-                    })
-                    .update('campus', maker.campus)
-                    .returning('*');
-                }
-                if(maker.rut != null && maker.categoria != null && maker.carrera != null){
-                    const individuo = await db('makers').where({
-                        rut: maker.rut,
-                        categoria: maker.categoria
-                    })
-                    .update('carrera', maker.carrera)
-                    .returning('*');
-                }
-                if(maker.rut != null && maker.categoria != null && maker.rango != null){
-                    const individuo = await db('makers').where({
-                        rut: maker.rut,
-                        categoria: maker.categoria
-                    })
-                    .update('rango', maker.rango)
-                    .returning('*');
+
+                    return individuo;
                 }
             }
+            //estudiante
+            if(maker.rut != null && maker.categoria === 'estudiante'){
+                
+                if(maker.nombre != null){
+                    const individuo = await db('makers').where({
+                        rut: maker.rut,
+                        categoria: maker.categoria
+                    })
+                    .update('nombre', maker.nombre);
+                }
+                if(maker.carrera != null){
+                    const individuo = await db('makers').where({
+                        rut: maker.rut,
+                        categoria: maker.categoria
+                    })
+                    .update('carrera', maker.carrera);
+                }
+                if(maker.campus != null){
+                    const individuo = await db('makers').where({
+                        rut: maker.rut,
+                        categoria: maker.categoria
+                    })
+                    .update('campus', maker.campus);
+                }
 
-            const individuo = await db('makers').where({
-                rut: maker.rut,
-                categoria: maker.categoria
-            });
-            return individuo;
+                const individuo = await db('makers').where({
+                    rut: maker.rut,
+                    categoria: maker.categoria
+                });
+
+                console.log(individuo);
+                console.log(maker);
+
+                return individuo;
+            }
+            //ayudante
+            if(maker.rut != null && maker.categoria === 'ayudante'){
+                if(maker.nombre != null){
+                    const individuo = await db('makers').where({
+                        rut: maker.rut,
+                        categoria: maker.categoria
+                    })
+                    .update('nombre', maker.nombre);
+
+                }
+                if(maker.rango != null){
+                    const individuo = await db('makers').where({
+                        rut: maker.rut,
+                        categoria: maker.categoria
+                    })
+                    .update('rango', maker.rango);  
+                }
+
+                const individuo = await db('makers').where({
+                    rut: maker.rut,
+                    categoria: maker.categoria
+                });
+
+                return individuo;
+            }
         }
         catch(error) {
             console.log(error);
@@ -134,7 +159,6 @@ module.exports = {
     },
 
     async delete(maker){
-        const individuo = 0;
         try{
             const individuo = await db('makers').where({
                 rut: maker.rut,
