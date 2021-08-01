@@ -1,4 +1,6 @@
+
 {
+  "postinstall": "knex migrate:latest:",
   "name": "proyecto_fablab_api",
   "engines": {
     "node": "14.17.3"

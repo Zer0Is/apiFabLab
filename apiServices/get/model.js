@@ -2,6 +2,7 @@ const { NotExtended } = require('http-errors');
 const db = require('../../db');
 
 const depurar = (objeto) => {
+    delete parametro.id
     objeto.forEach(function(parametro, index) {
         if (parametro.categoria.toLowerCase() === 'ayudante'){
             delete parametro.carrera

@@ -3,6 +3,7 @@ const db = require('../../db');
 
 const depurar = (objeto) => {
     objeto.forEach(function(parametro, index) {
+        delete parametro.id
         if (parametro.categoria.toLowerCase() === 'ayudante'){
             delete parametro.carrera
             delete parametro.campus
@@ -23,11 +24,11 @@ module.exports = {
         try{
             if(maker.categoria.toLowerCase() === 'estudiante'){
                 const individuo = await db('makers').insert({
-                rut: maker.rut,
-                categoria: maker.categoria,
-                nombre: maker.nombre,
-                carrera: maker.carrera,
-                campus: maker.campus
+                rut: maker.rut.toLowerCase(),
+                categoria: maker.categoria.toLowerCase(),
+                nombre: maker.nombre.toLowerCase(),
+                carrera: maker.carrera.toLowerCase(),
+                campus: maker.campus.toLowerCase()
                 })
                 .returning('*');
 
@@ -37,10 +38,11 @@ module.exports = {
             }
 
             else if(maker.categoria.toLowerCase() === 'ayudante'){
+                console.log("si");
                 const individuo = await db('makers').insert({
-                rut: maker.rut,
-                categoria: maker.categoria,
-                nombre: maker.nombre,
+                rut: maker.rut.toLowerCase(),
+                categoria: maker.categoria.toLowerCase(),
+                nombre: maker.nombre.toLowerCase(),
                 rango: maker.rango
                 })
                 .returning('*');
@@ -52,9 +54,9 @@ module.exports = {
 
             else if(maker.categoria.toLowerCase() === 'externo'){
                 const individuo = await db('makers').insert({
-                rut: maker.rut,
-                categoria: maker.categoria,
-                nombre: maker.nombre
+                rut: maker.rut.toLowerCase(),
+                categoria: maker.categoria.toLowerCase(),
+                nombre: maker.nombre.toLowerCase()
                 })
                 .returning('*'); 
 
@@ -82,7 +84,6 @@ module.exports = {
             //solo categoria
             else if (Object.keys(maker).length === 1 && maker.categoria != null){
                 const individuo = await db('makers').where('categoria', maker.categoria.toLowerCase());
-
                 const individuo2 = depurar(individuo);
 
                 return individuo2;

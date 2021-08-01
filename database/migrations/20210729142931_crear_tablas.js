@@ -8,7 +8,7 @@ exports.up = function(knex) {
         table.string('nombre').notNullable();
         table.string('carrera');
         table.string('campus');
-        table.string('rango');
+        table.integer('rango');
         table.unique(['rut', 'categoria']);
       })
       .createTable('gestor', (table) => {
