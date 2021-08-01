@@ -1,16 +1,36 @@
 const { NotExtended } = require('http-errors');
 const db = require('../../db');
 
+const depurar = (objeto) => {
+    objeto.forEach(function(parametro, index) {
+        if (parametro.categoria.toLowerCase() === 'ayudante'){
+            delete parametro.carrera
+            delete parametro.campus
+        }
+        else if (parametro.categoria.toLowerCase() === 'externo'){
+            delete parametro.carrera
+            delete parametro.campus
+            delete parametro.rango
+        }
+        else if (parametro.categoria.toLowerCase() === 'estudiante'){
+            delete parametro.rango
+        }
+    });
+    return objeto;
+}
+
 module.exports = {
     async readMaker(maker){
         try{
             if(maker.rut != null && maker.categoria != null){
                 const individuo = await db('makers').where({
-                    rut: maker.rut,
-                    categoria: maker.categoria
+                    rut: maker.rut.toLowerCase(),
+                    categoria: maker.categoria.toLowerCase()
                 });
 
-                return individuo;
+                const individuo2 = depurar(individuo);
+
+                return individuo2;
             }
         }
         catch(error) {
@@ -22,11 +42,13 @@ module.exports = {
         try{
             if(ayudante.rut != null){
                 const individuo = await db('makers').where({
-                    rut: ayudante.rut,
+                    rut: ayudante.rut.toLowerCase(),
                     categoria: 'ayudante'
                 });
 
-                return individuo;
+                const individuo2 = depurar(individuo);
+
+                return individuo2;
             }
         }
         catch(error) {
