@@ -179,13 +179,15 @@ module.exports = {
                         rut: maker.rut.toLowerCase(),
                         categoria: maker.categoria.toLowerCase()
                     })
-                    .update('rango', maker.rango.toLowerCase());  
+                    .update('rango', maker.rango);  
                 }
 
                 const individuo = await db('makers').where({
                     rut: maker.rut.toLowerCase(),
                     categoria: maker.categoria.toLowerCase()
                 });
+
+                console.log(individuo);
 
                 const individuo2 = depurar(individuo);
                     
