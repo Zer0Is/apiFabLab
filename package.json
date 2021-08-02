@@ -1,6 +1,5 @@
 
 {
-  "postinstall": "knex migrate:latest:",
   "name": "proyecto_fablab_api",
   "engines": {
     "node": "14.17.3"
@@ -8,7 +7,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "postinstall": "knex migrate:latest:"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
