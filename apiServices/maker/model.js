@@ -101,6 +101,14 @@ module.exports = {
 
                 return individuo2;
             }
+            //solo gestor
+            else if (Object.keys(maker).length === 1 && maker.gestor != null){
+                const individuo = await db('makers').where('rut', maker.gestor.toLowerCase());
+
+                const individuo2 = depurar(individuo);
+
+                return individuo2;
+            }
             //ambos
             else if (Object.keys(maker).length === 2 && maker.categoria != null && maker.rut != null){
                 const individuo = await db('makers').where({
@@ -130,11 +138,23 @@ module.exports = {
                     })
                     .update('nombre', maker.nombre.toLowerCase())
                     .returning('*');
-
-                    const individuo2 = depurar(individuo);
-                    
-                    return individuo2;
                 }
+                if(maker.gestor != null){
+                    const individuo = await db('makers').where({
+                        rut: maker.rut.toLowerCase(),
+                        categoria: maker.categoria.toLowerCase()
+                    })
+                    .update('gestor', maker.gestor.toLowerCase())
+                    .returning('*');
+                }
+                const individuo = await db('makers').where({
+                    rut: maker.rut.toLowerCase(),
+                    categoria: maker.categoria.toLowerCase()
+                });
+
+                const individuo2 = depurar(individuo);
+                    
+                return individuo2;
             }
             //estudiante
             if(maker.rut != null && maker.categoria.toLowerCase() === 'estudiante'){
@@ -187,13 +207,18 @@ module.exports = {
                     })
                     .update('rango', maker.rango);  
                 }
-
+                if(maker.gestor != null){
+                    const individuo = await db('makers').where({
+                        rut: maker.rut.toLowerCase(),
+                        categoria: maker.categoria.toLowerCase()
+                    })
+                    .update('gestor', maker.gestor.toLowerCase())
+                    .returning('*');
+                }
                 const individuo = await db('makers').where({
                     rut: maker.rut.toLowerCase(),
                     categoria: maker.categoria.toLowerCase()
                 });
-
-                console.log(individuo);
 
                 const individuo2 = depurar(individuo);
                     
