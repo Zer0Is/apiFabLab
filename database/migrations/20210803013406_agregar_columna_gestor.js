@@ -6,7 +6,7 @@ exports.up = function(knex) {
     })
   };
   
-  exports.down = function(knex) {
+exports.down = function(knex) {
     return knex.schema.table('makers', table => {
       table.dropColumn('gestor');
     })
