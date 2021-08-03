@@ -7,6 +7,7 @@ const depurar = (objeto) => {
         if (parametro.categoria.toLowerCase() === 'ayudante'){
             delete parametro.carrera
             delete parametro.campus
+            delete parametro.institucion
         }
         else if (parametro.categoria.toLowerCase() === 'externo'){
             delete parametro.carrera
@@ -16,6 +17,7 @@ const depurar = (objeto) => {
         else if (parametro.categoria.toLowerCase() === 'estudiante'){
             delete parametro.rango
             delete parametro.gestor
+            delete parametro.institucion
         }
     });
     return objeto;
@@ -29,7 +31,8 @@ module.exports = {
                 categoria: maker.categoria.toLowerCase(),
                 nombre: maker.nombre.toLowerCase(),
                 carrera: maker.carrera.toLowerCase(),
-                campus: maker.campus.toLowerCase()
+                campus: maker.campus.toLowerCase(),
+                correo: maker.correo.toLowerCase() 
                 })
                 .returning('*');
 
@@ -45,7 +48,8 @@ module.exports = {
                 categoria: maker.categoria.toLowerCase(),
                 nombre: maker.nombre.toLowerCase(),
                 rango: maker.rango,
-                gestor: maker.gestor.toLowerCase()
+                gestor: maker.gestor.toLowerCase(),
+                correo: maker.correo.toLowerCase()
                 })
                 .returning('*');
 
@@ -59,7 +63,9 @@ module.exports = {
                 rut: maker.rut.toLowerCase(),
                 categoria: maker.categoria.toLowerCase(),
                 nombre: maker.nombre.toLowerCase(),
-                gestor: maker.gestor.toLowerCase()
+                gestor: maker.gestor.toLowerCase(),
+                correo: maker.correo.toLowerCase(),
+                institucion: maker.institucion.toLowerCase()
                 })
                 .returning('*'); 
 
@@ -147,6 +153,22 @@ module.exports = {
                     .update('gestor', maker.gestor.toLowerCase())
                     .returning('*');
                 }
+                if(maker.correo != null){
+                    const individuo = await db('makers').where({
+                        rut: maker.rut.toLowerCase(),
+                        categoria: maker.categoria.toLowerCase()
+                    })
+                    .update('correo', maker.correo.toLowerCase())
+                    .returning('*');
+                }
+                if(maker.institucion != null){
+                    const individuo = await db('makers').where({
+                        rut: maker.rut.toLowerCase(),
+                        categoria: maker.categoria.toLowerCase()
+                    })
+                    .update('institucion', maker.institucion.toLowerCase())
+                    .returning('*');
+                }
                 const individuo = await db('makers').where({
                     rut: maker.rut.toLowerCase(),
                     categoria: maker.categoria.toLowerCase()
@@ -179,6 +201,14 @@ module.exports = {
                         categoria: maker.categoria.toLowerCase()
                     })
                     .update('campus', maker.campus.toLowerCase());
+                }
+                if(maker.correo != null){
+                    const individuo = await db('makers').where({
+                        rut: maker.rut.toLowerCase(),
+                        categoria: maker.categoria.toLowerCase()
+                    })
+                    .update('correo', maker.correo.toLowerCase())
+                    .returning('*');
                 }
 
                 const individuo = await db('makers').where({
@@ -213,6 +243,14 @@ module.exports = {
                         categoria: maker.categoria.toLowerCase()
                     })
                     .update('gestor', maker.gestor.toLowerCase())
+                    .returning('*');
+                }
+                if(maker.correo != null){
+                    const individuo = await db('makers').where({
+                        rut: maker.rut.toLowerCase(),
+                        categoria: maker.categoria.toLowerCase()
+                    })
+                    .update('correo', maker.correo.toLowerCase())
                     .returning('*');
                 }
                 const individuo = await db('makers').where({

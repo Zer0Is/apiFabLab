@@ -7,7 +7,8 @@ module.exports = {
             if (maker.rut != null && maker.nombre != null){
                 const gestor = await db('gestor').insert({
                 rut: maker.rut.toLowerCase(),
-                nombre: maker.nombre.toLowerCase()
+                nombre: maker.nombre.toLowerCase(),
+                correo: maker.correo.toLowerCase()
                 })
                 .returning('*');
 
@@ -54,10 +55,16 @@ module.exports = {
 
     async update(maker){
         try{
-            //solo permite cambiar el nombre
+            //cambiar el nombre
             if(maker.rut != null && maker.nombre != null){
                 const gestor = await db('gestor').where('rut', maker.rut.toLowerCase())
                 .update('nombre', maker.nombre.toLowerCase());
+            }
+
+            //cambiar el correo
+            if(maker.rut != null && maker.correo != null){
+                const gestor = await db('gestor').where('rut', maker.rut.toLowerCase())
+                .update('correo', maker.correo.toLowerCase());
             }
 
             //retorna gestor perteneciente al rut
