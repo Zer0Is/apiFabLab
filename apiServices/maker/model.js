@@ -15,6 +15,7 @@ const depurar = (objeto) => {
         }
         else if (parametro.categoria.toLowerCase() === 'estudiante'){
             delete parametro.rango
+            delete parametro.gestor
         }
     });
     return objeto;
@@ -43,7 +44,8 @@ module.exports = {
                 rut: maker.rut.toLowerCase(),
                 categoria: maker.categoria.toLowerCase(),
                 nombre: maker.nombre.toLowerCase(),
-                rango: maker.rango
+                rango: maker.rango,
+                gestor: maker.gestor.toLowerCase()
                 })
                 .returning('*');
 
@@ -56,7 +58,8 @@ module.exports = {
                 const individuo = await db('makers').insert({
                 rut: maker.rut.toLowerCase(),
                 categoria: maker.categoria.toLowerCase(),
-                nombre: maker.nombre.toLowerCase()
+                nombre: maker.nombre.toLowerCase(),
+                gestor: maker.gestor.toLowerCase()
                 })
                 .returning('*'); 
 
@@ -68,6 +71,8 @@ module.exports = {
         }
         catch(error) {
             console.log(error);
+            return error.detail;
+            
         }
     },
 
@@ -110,6 +115,7 @@ module.exports = {
         }
         catch(error) {
             console.log(error);
+            return error.detail;
         }
     },
 
@@ -196,6 +202,7 @@ module.exports = {
         }
         catch(error) {
             console.log(error);
+            return error.detail;
         }
     },
 
@@ -214,6 +221,7 @@ module.exports = {
         }
         catch(error) {
             console.log(error);
+            return error.detail;
         }
     }    
 };

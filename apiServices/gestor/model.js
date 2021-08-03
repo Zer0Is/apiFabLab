@@ -16,6 +16,7 @@ module.exports = {
         }
         catch(error) {
             console.log(error);
+            return error.detail;
         }
     },
 
@@ -47,6 +48,7 @@ module.exports = {
         }
         catch(error) {
             console.log(error);
+            return error.detail;
         }
     },
 
@@ -65,6 +67,7 @@ module.exports = {
         }
         catch(error) {
             console.log(error);
+            return error.detail;
         }
     },
 
@@ -77,6 +80,7 @@ module.exports = {
         }
         catch(error) {
             console.log(error);
+            return error.detail;
         }
     }    
 };

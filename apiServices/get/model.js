@@ -15,6 +15,7 @@ const depurar = (objeto) => {
         }
         else if (parametro.categoria.toLowerCase() === 'estudiante'){
             delete parametro.rango
+            delete parametro.gestor
         }
     });
     return objeto;
@@ -36,6 +37,7 @@ module.exports = {
         }
         catch(error) {
             console.log(error);
+            return error.detail;
         }
     },
 
@@ -54,6 +56,7 @@ module.exports = {
         }
         catch(error) {
             console.log(error);
+            return error.detail;
         }
     }
 };
