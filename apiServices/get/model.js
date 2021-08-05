@@ -26,11 +26,8 @@ const depurar = (objeto) => {
 module.exports = {
     async readMaker(maker){
         try{
-            if(maker.rut != null && maker.categoria != null){
-                const individuo = await db('makers').where({
-                    rut: maker.rut.toLowerCase(),
-                    categoria: maker.categoria.toLowerCase()
-                });
+            if(maker.id != null){
+                const individuo = await db('makers').where('id' , maker.id);
 
                 const individuo2 = depurar(individuo);
 
@@ -45,9 +42,9 @@ module.exports = {
 
     async readAyudante(ayudante){
         try{
-            if(ayudante.rut != null){
+            if(ayudante.id != null){
                 const individuo = await db('makers').where({
-                    rut: ayudante.rut.toLowerCase(),
+                    id: ayudante.id,
                     categoria: 'ayudante'
                 });
 
