@@ -8,14 +8,6 @@ module.exports = {
 
     async read(req, res){
         const maker = await makerModel.read(req.body);
-        /*
-        const maker2 = {
-            Items : maker,
-            count : maker.length 
-        };
-        console.log(maker2.Items);
-
-        return res.json(maker2);*/
         return res.json(maker);
     },
 

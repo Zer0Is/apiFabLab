@@ -7,6 +7,7 @@ const depurar = (objeto) => {
         if (parametro.categoria.toLowerCase() === 'ayudante'){
             delete parametro.carrera
             delete parametro.campus
+            delete parametro.institucion
         }
         else if (parametro.categoria.toLowerCase() === 'externo'){
             delete parametro.carrera
@@ -16,6 +17,7 @@ const depurar = (objeto) => {
         else if (parametro.categoria.toLowerCase() === 'estudiante'){
             delete parametro.rango
             delete parametro.gestor
+            delete parametro.institucion
         }
     });
     return objeto;
