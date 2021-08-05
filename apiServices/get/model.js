@@ -33,6 +33,9 @@ module.exports = {
 
                 return individuo2;
             }
+            else{
+                return "Falta ID";
+            }
         }
         catch(error) {
             console.log(error);
@@ -51,6 +54,9 @@ module.exports = {
                 const individuo2 = depurar(individuo);
 
                 return individuo2;
+            }
+            else{
+                return "Falta ID";
             }
         }
         catch(error) {
