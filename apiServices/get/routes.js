@@ -3,7 +3,7 @@ const controller = require('./controller');
 
 var router = express.Router();
 
-router.get('/get/maker/:id', controller.readMaker);
-router.get('/get/ayudante/:id', controller.readAyudante);
+router.post('/get/maker', controller.readMaker);
+router.post('/get/ayudante', controller.readAyudante);
 
 module.exports = router;
