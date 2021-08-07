@@ -3,14 +3,14 @@ var router = express.Router();
 const requestify = require('requestify');
 
 router.get('/:online', async (req, res) => {
-    var url = 'https://c840cfx2we.execute-api.us-east-1.amazonaws.com/dev/isw/printer-report';
+    var url = 'https://prueba2test.herokuapp.com/get/maker';
     var online = req.params.online;
     var arr = [];
 
-    var resultado = await requestify.get(url).then((response) =>{
-        return response.getBody().Items;
+    var resultado = await requestify.get(url, {id : 1}).then((response) =>{
+        return response.getBody();
     });
-
+    /*
     for (let i=0;i<resultado.length;i++){
       const element = resultado[i];
       if (element.online_offline == online){
@@ -23,8 +23,9 @@ router.get('/:online', async (req, res) => {
         })
       }
     }
+    */
 
-    return res.json({result: arr});
+    return res.json(resultado);
 
 });
 
