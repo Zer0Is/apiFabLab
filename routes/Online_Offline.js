@@ -7,7 +7,7 @@ router.get('/:online', async (req, res) => {
     var online = req.params.online;
     var arr = [];
 
-    var resultado = await requestify.get(url, {id : 1}).then((response) =>{
+    var resultado = await requestify.post(url, {id : 1}).then((response) =>{
         return response.getBody();
     });
     /*
