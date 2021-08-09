@@ -3,7 +3,6 @@ const db = require('../../db');
 
 const depurar = (objeto) => {
     objeto.forEach(function(parametro, index) {
-        delete parametro.id
         if (parametro.categoria.toLowerCase() === 'ayudante'){
             delete parametro.carrera
             delete parametro.campus
