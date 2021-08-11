@@ -280,7 +280,7 @@ module.exports = {
 
             const individuo2 = depurar(individuo);
 
-            var resultado = await requestify.get('https://isw-group-14.herokuapp.com/proyectos/maker/' + individuo2.id);
+            var resultado = await requestify.delete('https://isw-group-14.herokuapp.com/proyectos/maker/' + individuo2.id);
 
             return individuo2;
         }
