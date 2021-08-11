@@ -279,14 +279,13 @@ module.exports = {
             .returning('*');
 
             const individuo2 = depurar(individuo);
-
-            var resultado = await requestify.delete('https://isw-group-14.herokuapp.com/proyectos/maker/' + individuo2.id);
+            //const resultado = await requestify.delete('https://isw-group-14.herokuapp.com/proyectos/maker/' + individuo2.id);
 
             return individuo2;
         }
         catch(error) {
             console.log(error);
-            return error.detail;
+            return error.detail
         }
     }    
 };
