@@ -1,4 +1,5 @@
 const { NotExtended } = require('http-errors');
+const requestify = require('requestify');
 const db = require('../../db');
 
 const depurar = (objeto) => {
@@ -278,7 +279,9 @@ module.exports = {
             .returning('*');
 
             const individuo2 = depurar(individuo);
-                    
+
+            var resultado = await requestify.get('https://isw-group-14.herokuapp.com/proyectos/maker/' + individuo2.id);
+
             return individuo2;
         }
         catch(error) {
