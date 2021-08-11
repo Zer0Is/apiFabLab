@@ -22,6 +22,7 @@ const depurar = (objeto) => {
     });
     return objeto;
 }
+
 module.exports = {
     async create(maker){
         try{
@@ -38,7 +39,7 @@ module.exports = {
 
                 const individuo2 = depurar(individuo);
 
-                return individuo2;
+                return individuo2[0];
             }
 
             else if(maker.categoria.toLowerCase() === 'ayudante'){
@@ -55,7 +56,7 @@ module.exports = {
 
                 const individuo2 = depurar(individuo);
 
-                return individuo2;
+                return individuo2[0];   
             }
 
             else if(maker.categoria.toLowerCase() === 'externo'){
@@ -71,7 +72,7 @@ module.exports = {
 
                 const individuo2 = depurar(individuo);
 
-                return individuo2;
+                return individuo2[0];
             }
 
         }
@@ -176,7 +177,7 @@ module.exports = {
 
                 const individuo2 = depurar(individuo);
                     
-                return individuo2;
+                return individuo2[0];
             }
             //estudiante
             if(maker.rut != null && maker.categoria.toLowerCase() === 'estudiante'){
@@ -218,7 +219,7 @@ module.exports = {
 
                 const individuo2 = depurar(individuo);
                     
-                return individuo2;
+                return individuo2[0];
             }
             //ayudante
             if(maker.rut != null && maker.categoria.toLowerCase() === 'ayudante'){
@@ -260,7 +261,7 @@ module.exports = {
 
                 const individuo2 = depurar(individuo);
                     
-                return individuo2;
+                return individuo2[0];
             }
         }
         catch(error) {
