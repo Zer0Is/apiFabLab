@@ -28,12 +28,19 @@ module.exports = {
             if(maker.id != null){
                 const individuo = await db('makers').where('id' , maker.id);
 
+                if(individuo.length === 0){
+                    return {msg : "ID no encontrado"}
+                }
+
                 const individuo2 = depurar(individuo);
 
                 return individuo2;
             }
             else{
-                return "Falta ID";
+                return {
+                    status : 400,
+                    error : 'Falta ID'
+                };
             }
         }
         catch(error) {
@@ -50,17 +57,27 @@ module.exports = {
                     categoria: 'ayudante'
                 });
 
+                if(individuo.length === 0){
+                    return {msg : "ID no encontrado"}
+                }
+                
                 const individuo2 = depurar(individuo);
 
                 return individuo2;
             }
             else{
-                return "Falta ID";
+                return {
+                    status : 400,
+                    error : 'Falta ID'
+                };
             }
         }
         catch(error) {
             console.log(error);
-            return error.detail;
+            return {
+                status : 400,
+                error : error.detail
+            };
         }
     }
 };

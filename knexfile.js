@@ -1,4 +1,5 @@
 const path = require('path');
+require('dotenv').config();
 
 module.exports = {
   test: {
@@ -15,9 +16,9 @@ module.exports = {
   development: {
     client: 'pg',
     connection: {
-      database: "fablab",
-      user: "postgres",
-      password: "12345"
+      database: process.env.DB_NAME,
+      user: process.env.USER,
+      password: process.env.PASSWORD
     },
     migrations: {
       directory: path.join(__dirname, '/database/migrations'),
