@@ -4,7 +4,7 @@ const db = require('../../db');
 module.exports = {
     async create(maker){
         try{
-            if (maker.rut != null && maker.nombre != null){
+            if (maker.rut != null && maker.nombre != null && maker.correo != null){
                 const gestor = await db('gestor').insert({
                 rut: maker.rut.toLowerCase(),
                 nombre: maker.nombre.toLowerCase(),
@@ -14,10 +14,16 @@ module.exports = {
 
                 return gestor;
             }
+            else{
+                return  {status : 400};
+            }
         }
         catch(error) {
             console.log(error);
-            return error.detail;
+            return {
+                status : 400,
+                error : error.detail
+            };
         }
     },
 

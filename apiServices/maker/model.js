@@ -26,63 +26,86 @@ const depurar = (objeto) => {
 module.exports = {
     async create(maker){
         try{
-            if(maker.categoria.toLowerCase() === 'estudiante'){
-                const individuo = await db('makers').insert({
-                rut: maker.rut.toLowerCase(),
-                categoria: maker.categoria.toLowerCase(),
-                nombre: maker.nombre.toLowerCase(),
-                carrera: maker.carrera.toLowerCase(),
-                campus: maker.campus.toLowerCase(),
-                correo: maker.correo.toLowerCase() 
-                })
-                .returning('*');
-
-                const individuo2 = depurar(individuo);
-
-                return individuo2[0];
+            if(maker.categoria == null){
+                return {
+                    status : 400,
+                    error : "falta categoria"
+                };
+            }
+            else if(maker.categoria.toLowerCase() === 'estudiante'){
+                if(maker.rut != null && maker.categoria != null && maker.nombre != null && maker.carrera != null && maker.campus != null && maker.campus != null){
+                    const individuo = await db('makers').insert({
+                        rut: maker.rut.toLowerCase(),
+                        categoria: maker.categoria.toLowerCase(),
+                        nombre: maker.nombre.toLowerCase(),
+                        carrera: maker.carrera.toLowerCase(),
+                        campus: maker.campus.toLowerCase(),
+                        correo: maker.correo.toLowerCase() 
+                    })
+                    .returning('*');
+    
+                    const individuo2 = depurar(individuo);
+    
+                    return individuo2[0];
+                }
+                else{
+                    return  {status : 400};
+                }
+                
             }
 
             else if(maker.categoria.toLowerCase() === 'ayudante'){
-                console.log("si");
-                const individuo = await db('makers').insert({
-                rut: maker.rut.toLowerCase(),
-                categoria: maker.categoria.toLowerCase(),
-                nombre: maker.nombre.toLowerCase(),
-                rango: maker.rango,
-                gestor: maker.gestor.toLowerCase(),
-                correo: maker.correo.toLowerCase()
-                })
-                .returning('*');
-
-                const individuo2 = depurar(individuo);
-
-                return individuo2[0];   
+                if(maker.rut != null && maker.categoria != null && maker.nombre != null && maker.rango != null && maker.gestor != null && maker.correo != null){
+                    const individuo = await db('makers').insert({
+                        rut: maker.rut.toLowerCase(),
+                        categoria: maker.categoria.toLowerCase(),
+                        nombre: maker.nombre.toLowerCase(),
+                        rango: maker.rango,
+                        gestor: maker.gestor.toLowerCase(),
+                        correo: maker.correo.toLowerCase()
+                    })
+                    .returning('*');
+    
+                    const individuo2 = depurar(individuo);
+    
+                    return individuo2[0];
+                }   
+                else{
+                    return  {status : 400};
+                }
             }
 
             else if(maker.categoria.toLowerCase() === 'externo'){
-                const individuo = await db('makers').insert({
-                rut: maker.rut.toLowerCase(),
-                categoria: maker.categoria.toLowerCase(),
-                nombre: maker.nombre.toLowerCase(),
-                gestor: maker.gestor.toLowerCase(),
-                correo: maker.correo.toLowerCase(),
-                institucion: maker.institucion.toLowerCase()
-                })
-                .returning('*'); 
-
-                const individuo2 = depurar(individuo);
-
-                return individuo2[0];
+                if(maker.rut != null && maker.categoria != null && maker.nombre != null && maker.gestor != null && maker.correo != null && maker.institucion != null){
+                    const individuo = await db('makers').insert({
+                        rut: maker.rut.toLowerCase(),
+                        categoria: maker.categoria.toLowerCase(),
+                        nombre: maker.nombre.toLowerCase(),
+                        gestor: maker.gestor.toLowerCase(),
+                        correo: maker.correo.toLowerCase(),
+                        institucion: maker.institucion.toLowerCase()
+                    })
+                    .returning('*'); 
+    
+                    const individuo2 = depurar(individuo);
+    
+                    return individuo2[0];
+                }
+                else{
+                    return  {status : 400};
+                }
             }
-
         }
         catch(error) {
             console.log(error);
-            return error.detail;
+            return {
+                status : 400,
+                error : error.detail
+            };
             
         }
     },
-
+    
     async read(maker){
         try{
             //No lleva parametros

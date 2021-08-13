@@ -4,7 +4,6 @@ const getModel = require('./model');
 module.exports = {
     async readMaker(req, res){
         const maker = await getModel.readMaker(req.body);
-
         return res.json(maker);
     },
 
